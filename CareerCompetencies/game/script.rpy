@@ -189,18 +189,20 @@ label start:
 
 
 
-    if persistent.analytics is None:
+    # if persistent.analytics is None:
 
-        menu:
-            "Welcome! This game supports analytics. Enabling it will help us make better games, and will send data to Google Analytics and the developers. Do you want to enable analytics?"
+    #     menu:
+    #         "Welcome! This game supports analytics. Enabling it will help us make better games, and will send data to Google Analytics and the developers. Do you want to enable analytics?"
 
-            "Yes.":
-                $ persistent.analytics = True
-                "Thank you."
+    #         "Yes.":
+    #             $ persistent.analytics = True
+    #             "Thank you."
 
-            "No.":
-                $ persistent.analytics = False
-                "No problem!"
+    #         "No.":
+    #             $ persistent.analytics = False
+    #             "No problem!"
+
+    $ test_analytics.test_event()
 
     init python:
         def label_callback(label, abnormal):
@@ -209,10 +211,11 @@ label start:
             filename = renpy.get_filename_line()[0]
             if filename.startswith("renpy/common/"):
                 return
-
-            analytics.event("Label", label)
-
+            
+            #analytics.event("Label", label)
+        
         config.label_callback = label_callback
+        
 
     # begin is main 'Go To' scene
     jump begin
@@ -408,7 +411,8 @@ label welcome:
     # Welcome to Hendrix!
     show eileen with dissolve
     e "Welcome to Hendrix!"
-
+    e "[test_analytics.test]"
+    #e "[test_analytics.events]"
     e "I am Eileen, and I'll be around to help you get adjusted to the Hendrix life and explain some things about Hendrix!"
     e "You'll be seeing me a lot, so it's nice to meet you!"
     e "If you're ever unsure of where to go in life, or want more {color=#FFFF33}{u}Experience{/u}{/color}, make sure to visit us in Career Services in the SLTC and ask what your next steps should be."
